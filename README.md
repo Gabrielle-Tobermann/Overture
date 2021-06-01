@@ -1,6 +1,7 @@
 ## Project ERD 
 
-![overtureERD](https://user-images.githubusercontent.com/76187279/120136016-0e5b0280-c197-11eb-8957-91fdc4742ee9.png)
+![revisedOvertureERD](https://user-images.githubusercontent.com/76187279/120403144-3cf8ea80-c309-11eb-8614-a73275cd4f6d.png)
+
 
 I want my app to reflect how a shop would actually differentiate instruments with the instrumentID and bowID. Those two keys would be a unique identifier for each item, but would also give some information (just like in a shop) - if it's a violin, the instrument ID would like like this: V001. If it's a double bass, it would look like this: DB001. The users table is necessary because only shop employees and shop owner (who would also be the admin) would have access to any of the features of the app. Unauthenticated users can only see the home page, with no access to any tabs in the nav bar. The payment_info table will hold the payment_intent object, which is the response from creating a new payment intent though the Stripe API. It would also hold the customer ID for that transaction. 
 
