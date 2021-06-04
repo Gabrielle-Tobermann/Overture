@@ -72,7 +72,9 @@ I want my app to reflect how a shop would actually differentiate instruments wit
 - Google authentication - Users must log in to access any of the feaures
 - An instrument inventory view where the user can read, add, update, delete items.
 - A bow inventory with CRUD on items. 
-- An orders view for users to view exisiting orders, add or delete orders. 
+- Users can search instruments and bows by ID 
+- An orders view for users to view exisiting orders, add or delete orders.
+- Users can search order by customer name
 - A financial reports view just for the admin (shop owner) to see a chart of rental and sales revenue on instruments/bows for the year.
 
 
