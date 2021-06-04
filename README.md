@@ -1,3 +1,9 @@
+# Overture 
+
+Welcome to Overture, the perfect place for a violin shop to keep track of their inventory, reference their orders, and see some financial reporting on rentals and sales. 
+
+
+
 ## Project ERD 
 
 ![revisedOvertureERD](https://user-images.githubusercontent.com/76187279/120403144-3cf8ea80-c309-11eb-8614-a73275cd4f6d.png)
@@ -61,3 +67,14 @@ I want my app to reflect how a shop would actually differentiate instruments wit
     "transfer_group": null
 }
 ```
+
+## Features
+- Google authentication - Users must log in to access any of the feaures
+- An instrument inventory view where the user can read, add, update, delete items.
+- A bow inventory with CRUD on items. 
+- An orders view for users to view exisiting orders, add or delete orders. 
+- A financial reports view just for the admin (shop owner) to see a chart of rental and sales revenue on instruments/bows for the year.
+
+
+## Contributor
+https://github.com/Gabrielle-Tobermann
