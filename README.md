@@ -2,7 +2,8 @@
 
 Welcome to Overture, the perfect place for a violin shop to keep track of their inventory, reference their orders, and see some financial reporting on rentals and sales. 
 
-
+## Users 
+Users for this app are the shop owner and their employees. They will have to authenticate to access features.Customers do not access to this app.
 
 ## Project ERD 
 
@@ -271,7 +272,13 @@ This has the ID of the payment intent (first response above) in the HTTP request
 ```
 
 
+## Wireframe 
+https://www.figma.com/file/m559biWxFK2CleVPh4298G/Overture?node-id=0%3A1
 
+## Portfolio site 
+https://gabrielletobermann.netlify.app/
+
+## Project Board
 
 
 ## Features
