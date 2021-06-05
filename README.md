@@ -279,7 +279,7 @@ https://www.figma.com/file/m559biWxFK2CleVPh4298G/Overture?node-id=0%3A1
 https://gabrielletobermann.netlify.app/
 
 ## Project Board
-
+https://github.com/Gabrielle-Tobermann/Overture/projects/1
 
 ## Features
 - Google authentication - Users must log in to access any of the feaures
