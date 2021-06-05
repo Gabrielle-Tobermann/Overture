@@ -284,7 +284,7 @@ This has the ID of the payment intent (first response above) in the HTTP request
 [OrderFormComponent.pdf](https://github.com/Gabrielle-Tobermann/Overture/files/6602665/OrderFormComponent.pdf)
 
 
-## Wireframe 
+## Wireframe link
 https://www.figma.com/file/m559biWxFK2CleVPh4298G/Overture?node-id=0%3A1
 
 ## Portfolio site 
