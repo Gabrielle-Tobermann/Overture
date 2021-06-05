@@ -3,12 +3,11 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Button
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,21 +17,23 @@ const NavBar = () => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Instrument Inventory</NavLink>
+          <NavItem>
+              <Link className="nav-link" to='/'>Home</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Bow Inventory</NavLink>
+              <Link className="nav-link" to='/instrument-inventory'>Instrument Inventory</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Orders</NavLink>
+              <Link className="nav-link" to='/bow-inventory'>Bow Inventory</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Financial Reports</NavLink>
+              <Link className="nav-link" to='/orders'>Orders</Link>
+            </NavItem>
+            <NavItem>
+              <Link className="nav-link" to='/financial-reports'>Financial Reports</Link>
             </NavItem>
           </Nav>
           <Button>Sign In</Button>
