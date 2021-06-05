@@ -3,10 +3,12 @@
 Welcome to Overture, the perfect place for a violin shop to keep track of their inventory, reference their orders, and see some financial reporting on rentals and sales. 
 
 ## Users 
-Users for this app are the shop owner and their employees. They will have to authenticate to access features.Customers do not access to this app.
+Users for this app are the employees of the shop. They will have to authenticate to access features.Customers do not access to this app.
 - Users can read, add, update delete intruments/bows.
 - Users can read, add, delete an order 
-- Admin can view the financial reports 
+
+## Admin 
+The admin is the shop owner. They will have the same abilities as the regular users, but will also be able to see financial reports view, which will display a chart for rental revenue and a chart for sales revenue. 
 
 ## Project ERD 
 
