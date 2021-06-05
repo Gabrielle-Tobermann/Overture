@@ -300,7 +300,7 @@ https://github.com/Gabrielle-Tobermann/Overture/projects/1
 - A financial reports view just for the admin (shop owner) to see a chart of rental and sales revenue on instruments/bows for the year.
 
 ## Loom 
-
+https://www.loom.com/share/12362f2b77fc49b98ad890fbf5781d7c
 
 
 ## Contributor
