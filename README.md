@@ -270,6 +270,15 @@ This has the ID of the payment intent (first response above) in the HTTP request
     "transfer_group": null
 }
 ```
+## Flow chart 
+[Overture coding flow.pdf](https://github.com/Gabrielle-Tobermann/Overture/files/6602658/Overture.coding.flow.pdf)
+
+## User flow chart 
+[Overture user flow.pdf](https://github.com/Gabrielle-Tobermann/Overture/files/6602660/Overture.user.flow.pdf)
+
+
+## Helper chart for Stripe and OrderForm 
+[OrderFormComponent.pdf](https://github.com/Gabrielle-Tobermann/Overture/files/6602665/OrderFormComponent.pdf)
 
 
 ## Wireframe 
@@ -289,6 +298,9 @@ https://github.com/Gabrielle-Tobermann/Overture/projects/1
 - An orders view for users to view exisiting orders, add or delete orders.
 - Users can search order by customer name
 - A financial reports view just for the admin (shop owner) to see a chart of rental and sales revenue on instruments/bows for the year.
+
+## Loom 
+
 
 
 ## Contributor
