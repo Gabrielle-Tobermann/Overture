@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Collapse,
-  Navbar,
   NavbarToggler,
+  Navbar,
   Nav,
   NavItem,
   Button
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { signInUser, signOutUser } from '../helpers/auth';
+// import WholeNavbar from '../styles/NavStyle';
 
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,7 @@ const NavBar = ({ user }) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar className="whole-nav" light expand="md">
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
