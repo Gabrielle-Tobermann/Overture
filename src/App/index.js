@@ -32,7 +32,9 @@ function App() {
       <NavBar
       user={user}
       />
-      <Routes/>
+      <Routes
+      user={user}
+      />
     </Router>
     <Footer/>
     </div>
