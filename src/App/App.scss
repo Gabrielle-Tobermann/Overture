@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .whole-nav {
@@ -8,4 +11,19 @@
 
 .nav-link {
   color: white !important;
+  font-size: 20px;
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+::marker {
+  visibility: hidden !important;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 }

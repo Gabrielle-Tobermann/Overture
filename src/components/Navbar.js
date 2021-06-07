@@ -42,21 +42,21 @@ const NavBar = ({ user }) => {
       <Navbar className="whole-nav" light expand="md">
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="nav-bar" navbar>
          {user && authenticated()}
-            </Nav>
           <div>
           {
             user !== null
             && <NavItem>
               {
                 user
-                  ? <Button onClick={signOutUser}>Sign Out</Button>
-                  : <Button onClick={signInUser}>Sign In</Button>
+                  ? <Button outline color="light" className="rounded-pill" onClick={signOutUser}>Sign Out</Button>
+                  : <Button outline color="light" className="rounded-pill" onClick={signInUser}>Sign In</Button>
               }
               </NavItem>
           }
           </div>
+          </Nav>
         </Collapse>
       </Navbar>
     </div>
