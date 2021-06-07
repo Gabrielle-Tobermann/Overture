@@ -17,7 +17,8 @@ const PrivateRoute = ({ component: Component, user, ...rest }) => {
 
 PrivateRoute.propTypes = {
   component: PropTypes.func,
-  user: PropTypes.any
+  user: PropTypes.any,
+  admin: PropTypes.any
 };
 
 function Routes({ user }) {
@@ -40,7 +41,7 @@ function Routes({ user }) {
         component={OrderView}
         user={user}
         />
-        <privateRoute exact path='/financial-reports'
+        <PrivateRoute exact path='/financial-reports'
         component={FinancialReportsView}
         user={user}
         />
@@ -50,7 +51,8 @@ function Routes({ user }) {
 }
 
 Routes.propTypes = {
-  user: PropTypes.any
+  user: PropTypes.any,
+  admin: PropTypes.any
 };
 
 export default Routes;
