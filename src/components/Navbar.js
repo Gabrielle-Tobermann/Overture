@@ -30,9 +30,6 @@ const NavBar = ({ user, admin }) => {
     <NavItem>
       <Link className="nav-link" to='/orders'>Orders</Link>
     </NavItem>
-    <NavItem>
-      <Link className="nav-link" to='/financial-reports'>Financial Reports</Link>
-     </NavItem>
     </>
   );
 
@@ -43,6 +40,13 @@ const NavBar = ({ user, admin }) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="nav-bar" navbar>
          {(user || admin) && authenticated()}
+         {
+           admin
+             ? <NavItem>
+                <Link className="nav-link" to='/financial-reports'>Financial Reports</Link>
+             </NavItem>
+             : ''
+         }
           <div>
           {
             (user || admin) !== null

@@ -17,17 +17,30 @@ const PrivateRoute = ({ component: Component, user, ...rest }) => {
 
 PrivateRoute.propTypes = {
   component: PropTypes.func,
-  user: PropTypes.any,
+  user: PropTypes.any
+};
+
+const AdminRoute = ({ component: Component, admin, ...rest }) => {
+  const routeChecker = (remainder) => (admin
+    ? (<Component {...remainder} admin={admin} />)
+    : (<Redirect to={{ pathname: '/', state: { from: remainder.location } }} />));
+
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
+
+AdminRoute.propTypes = {
+  component: PropTypes.func,
   admin: PropTypes.any
 };
 
-function Routes({ user }) {
+function Routes({ user, admin }) {
   return (
     <div>
       <Switch>
         <Route exact path='/'
         component={Home}
         user={user}
+        admin={admin}
         />
         <PrivateRoute exact path='/instrument-inventory'
         component={InstrumentView}
@@ -41,9 +54,9 @@ function Routes({ user }) {
         component={OrderView}
         user={user}
         />
-        <PrivateRoute exact path='/financial-reports'
+        <AdminRoute exact path='/financial-reports'
         component={FinancialReportsView}
-        user={user}
+        admin={admin}
         />
       </Switch>
     </div>
