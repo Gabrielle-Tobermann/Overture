@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import getItems from '../helpers/data/itemsData';
 import ItemCard from '../components/ItemCard';
 
-function BowView({ items, setItems }) {
+function BowView({ items }) {
   useEffect(() => {
-    getItems().then((resp) => setItems(resp));
+    console.warn('bow view');
   }, []);
 
   return (

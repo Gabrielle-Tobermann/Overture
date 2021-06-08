@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import getItems from '../helpers/data/itemsData';
+import { Button } from 'reactstrap';
 import ItemCard from '../components/ItemCard';
+import ItemForm from '../components/ItemForm';
 
-function InstrumentView({ items, setItems }) {
+function InstrumentView({ items }) {
+  const [adding, setAdding] = useState(false);
+
   useEffect(() => {
-    getItems().then((resp) => setItems(resp));
+    console.warn('instrument view');
   }, []);
+
+  const handleButtonClick = () => {
+    setAdding(true);
+    console.warn('adding', adding);
+  };
 
   return (
     <div>
       <h1>Instrument Inventory</h1>
-      <Link to="/item-form">+</Link>
+      <Button onClick={handleButtonClick}>+</Button>
+      {adding && <ItemForm/>}
       {
         items.map((item) => (
           item.itemType === 'instrument'

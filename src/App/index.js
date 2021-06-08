@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Routes from '../helpers/routes';
 import NavBar from '../components/Navbar';
 import './App.scss';
+import { getItems } from '../helpers/data/itemsData';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,6 +40,10 @@ function App() {
         setAdmin(false);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    getItems().then((resp) => setItems(resp));
   }, []);
 
   return (

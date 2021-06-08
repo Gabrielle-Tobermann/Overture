@@ -6,7 +6,6 @@ import BowView from '../views/BowView';
 import FinancialReportsView from '../views/FinancialReportsView';
 import InstrumentView from '../views/InstrumentView';
 import OrderView from '../views/OrderView';
-import ItemForm from '../components/ItemForm';
 
 const PrivateRoute = ({
   component: Component, user, admin, ...rest
@@ -58,11 +57,6 @@ function Routes({
         />
         <PrivateRoute exact path='/orders'
         component={OrderView}
-        user={user}
-        admin={admin}
-        />
-        <PrivateRoute exact path='/item-form'
-        component={ItemForm}
         user={user}
         admin={admin}
         />

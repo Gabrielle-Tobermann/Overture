@@ -14,4 +14,15 @@ const getItems = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export default getItems;
+const createItem = (itemObj) => new Promise((resolve, reject) => {
+  axios.post(`${dbURL}/items.json`, itemObj)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbURL}/items/${response.data.name}.json`, body)
+        .then(() => {
+          getItems().then((resp) => resolve(resp));
+        });
+    }).catch((error) => reject(error));
+});
+
+export { getItems, createItem };
