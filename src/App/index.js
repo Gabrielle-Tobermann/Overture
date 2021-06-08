@@ -25,7 +25,7 @@ function App() {
       } else if (authed && authed.uid !== process.env.REACT_ADMIN_UID) {
         const userObj = {
           fullName: authed.displayName,
-          profileImage: authed.photoURL,
+          profilePicture: authed.photoURL,
           uid: authed.uid,
           user: authed.email.split('@')[0],
           admin: false

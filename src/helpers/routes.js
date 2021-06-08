@@ -23,19 +23,6 @@ PrivateRoute.propTypes = {
   admin: PropTypes.any
 };
 
-// const AdminRoute = ({ component: Component, admin, ...rest }) => {
-//   const routeChecker = (remainder) => (admin
-//     ? (<Component {...remainder} admin={admin} />)
-//     : (<Redirect to={{ pathname: '/', state: { from: remainder.location } }} />));
-
-//   return <Route {...rest} render={(props) => routeChecker(props)} />;
-// };
-
-// AdminRoute.propTypes = {
-//   component: PropTypes.func,
-//   admin: PropTypes.any
-// };
-
 function Routes({ user, admin }) {
   return (
     <div>
