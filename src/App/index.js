@@ -39,9 +39,6 @@ function App() {
     });
   }, []);
 
-  console.warn('user', user);
-  console.warn('admin', admin);
-
   return (
     <div className='App'>
     <Router>
