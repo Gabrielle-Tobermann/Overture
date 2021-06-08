@@ -10,9 +10,8 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { signInUser, signOutUser } from '../helpers/auth';
-// import WholeNavbar from '../styles/NavStyle';
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, admin }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -33,7 +32,7 @@ const NavBar = ({ user }) => {
     </NavItem>
     <NavItem>
       <Link className="nav-link" to='/financial-reports'>Financial Reports</Link>
-    </NavItem>
+     </NavItem>
     </>
   );
 
@@ -43,13 +42,13 @@ const NavBar = ({ user }) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="nav-bar" navbar>
-         {user && authenticated()}
+         {(user || admin) && authenticated()}
           <div>
           {
-            user !== null
+            (user || admin) !== null
             && <NavItem>
               {
-                user
+                user || admin
                   ? <Button outline color="light" className="rounded-pill" onClick={signOutUser}>Sign Out</Button>
                   : <Button outline color="light" className="rounded-pill" onClick={signInUser}>Sign In</Button>
               }
@@ -64,7 +63,8 @@ const NavBar = ({ user }) => {
 };
 
 NavBar.propTypes = {
-  user: PropTypes.any
+  user: PropTypes.any,
+  admin: PropTypes.any
 };
 
 export default NavBar;
