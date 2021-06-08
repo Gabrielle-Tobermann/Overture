@@ -23,20 +23,12 @@ PrivateRoute.propTypes = {
   admin: PropTypes.any
 };
 
-// const AdminRoute = ({ component: Component, admin, ...rest }) => {
-//   const routeChecker = (remainder) => (admin
-//     ? (<Component {...remainder} admin={admin} />)
-//     : (<Redirect to={{ pathname: '/', state: { from: remainder.location } }} />));
-
-//   return <Route {...rest} render={(props) => routeChecker(props)} />;
-// };
-
-// AdminRoute.propTypes = {
-//   component: PropTypes.func,
-//   admin: PropTypes.any
-// };
-
-function Routes({ user, admin }) {
+function Routes({
+  user,
+  admin,
+  items,
+  setItems
+}) {
   return (
     <div>
       <Switch>
@@ -46,7 +38,11 @@ function Routes({ user, admin }) {
         admin={admin}
         />
         <PrivateRoute exact path='/instrument-inventory'
-        component={InstrumentView}
+        component={() => <InstrumentView
+          items={items}
+          setItems={setItems}
+          />
+        }
         user={user}
         admin={admin}
         />
@@ -71,7 +67,9 @@ function Routes({ user, admin }) {
 
 Routes.propTypes = {
   user: PropTypes.any,
-  admin: PropTypes.any
+  admin: PropTypes.any,
+  items: PropTypes.array,
+  setItems: PropTypes.func
 };
 
 export default Routes;

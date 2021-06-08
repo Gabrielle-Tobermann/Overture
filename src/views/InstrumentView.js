@@ -1,14 +1,31 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import getItems from '../helpers/data/itemsData';
+import ItemCard from '../components/ItemCard';
 
-export default function InstrumentView() {
+function InstrumentView({ items, setItems }) {
   useEffect(() => {
-    getItems().then((resp) => console.warn(resp));
+    getItems().then((resp) => setItems(resp));
   }, []);
 
   return (
     <div>
-      <h1>Instruement Inventory</h1>
+      <h1>Instrument Inventory</h1>
+      {
+        items.map((item) => (
+          <ItemCard
+          key={item.firebaseKey}
+          itemID={item.itemID}
+          />
+        ))
+      }
     </div>
   );
 }
+
+InstrumentView.propTypes = {
+  items: PropTypes.array.isRequired,
+  setItems: PropTypes.func.isRequired
+};
+
+export default InstrumentView;

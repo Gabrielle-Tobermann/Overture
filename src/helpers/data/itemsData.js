@@ -7,7 +7,7 @@ const getItems = () => new Promise((resolve, reject) => {
   axios.get(`${dbURL}/items.json`)
     .then((response) => {
       if (response.data) {
-        resolve(response.data);
+        resolve(Object.values(response.data));
       } else {
         resolve([]);
       }
