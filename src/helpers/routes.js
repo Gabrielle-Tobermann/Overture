@@ -47,7 +47,11 @@ function Routes({
         admin={admin}
         />
         <PrivateRoute exact path='/bow-inventory'
-        component={BowView}
+        component={() => <BowView
+          items={items}
+          setItems={setItems}
+          />
+        }
         user={user}
         admin={admin}
         />

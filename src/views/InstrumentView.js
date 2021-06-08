@@ -13,10 +13,12 @@ function InstrumentView({ items, setItems }) {
       <h1>Instrument Inventory</h1>
       {
         items.map((item) => (
-          <ItemCard
-          key={item.firebaseKey}
-          itemID={item.itemID}
-          />
+          item.itemType === 'instrument'
+            ? <ItemCard
+            key={item.firebaseKey}
+            itemID={item.itemID}
+            />
+            : ''
         ))
       }
     </div>
