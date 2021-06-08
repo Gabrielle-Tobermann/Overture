@@ -49,10 +49,10 @@ const NavBar = ({ user, admin }) => {
          }
           <div>
           {
-            (user || admin) !== null
+            ((user !== null) || (admin !== null))
             && <NavItem>
               {
-                user || admin
+                (user || admin)
                   ? <Button outline color="light" className="rounded-pill" onClick={signOutUser}>Sign Out</Button>
                   : <Button outline color="light" className="rounded-pill" onClick={signInUser}>Sign In</Button>
               }
