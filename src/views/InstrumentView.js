@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import getItems from '../helpers/data/itemsData';
 import ItemCard from '../components/ItemCard';
 
@@ -11,6 +12,7 @@ function InstrumentView({ items, setItems }) {
   return (
     <div>
       <h1>Instrument Inventory</h1>
+      <Link to="/item-form">+</Link>
       {
         items.map((item) => (
           item.itemType === 'instrument'
