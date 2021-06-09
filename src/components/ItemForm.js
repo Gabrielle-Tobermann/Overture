@@ -8,8 +8,9 @@ import {
   Input
 } from 'reactstrap';
 import { createItem } from '../helpers/data/itemsData';
+import defineItemID from '../helpers/defineItemID';
 
-function ItemForm({ setItems }) {
+function ItemForm({ setItems, items }) {
   const [item, setItem] = useState({
     itemType: '',
     itemID: '',
@@ -21,6 +22,8 @@ function ItemForm({ setItems }) {
     material: '',
     image: ''
   });
+
+  defineItemID(items);
 
   const handleInputChange = (e) => {
     setItem((prevState) => ({
@@ -84,7 +87,8 @@ function ItemForm({ setItems }) {
 }
 
 ItemForm.propTypes = {
-  setItems: PropTypes.func
+  setItems: PropTypes.func,
+  items: PropTypes.array
 };
 
 export default ItemForm;
