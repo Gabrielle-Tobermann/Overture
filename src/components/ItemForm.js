@@ -59,19 +59,16 @@ function ItemForm({ setItems, items }) {
     }));
   };
 
-  console.warn(instrumentID);
   const handleInputChange = (e) => {
     defineID();
     setItem((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name === 'available' || e.target.name === 'rental' ? e.target.checked : e.target.value
     }));
-    console.warn(item);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.warn(item);
     createItem(item).then((resp) => setItems(resp));
   };
 
@@ -119,7 +116,6 @@ function ItemForm({ setItems, items }) {
           Available?
         </Label>
         </FormGroup>
-        <p>{instrumentID}</p>
         <Button onClick={handleSubmit} type="submit">Submit</Button>
       </Form>
     </div>
