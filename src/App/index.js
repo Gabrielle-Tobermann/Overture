@@ -6,10 +6,12 @@ import Footer from '../components/Footer';
 import Routes from '../helpers/routes';
 import NavBar from '../components/Navbar';
 import './App.scss';
+import { getItems } from '../helpers/data/itemsData';
 
 function App() {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(null);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -40,6 +42,10 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    getItems().then((resp) => setItems(resp));
+  }, []);
+
   return (
     <div className='App'>
     <Router>
@@ -50,6 +56,8 @@ function App() {
       <Routes
       user={user}
       admin={admin}
+      items={items}
+      setItems={setItems}
       />
     </Router>
     <Footer/>
