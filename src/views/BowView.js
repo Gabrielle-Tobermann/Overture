@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
 import ItemCard from '../components/ItemCard';
+import ItemForm from '../components/ItemForm';
 
-function BowView({ items }) {
-  useEffect(() => {
-    console.warn('bow view');
-  }, []);
+function BowView({ items, setItems }) {
+  const [adding, setAdding] = useState(false);
+
+  const handleButtonClick = () => {
+    setAdding(true);
+  };
 
   return (
     <div>
       <h1>Bow Inventory</h1>
+      <Button onClick={handleButtonClick}>+</Button>
+      {adding && <ItemForm
+      setItems={setItems}
+      />}
       {
         items.map((item) => (
           item.itemType === 'bow'

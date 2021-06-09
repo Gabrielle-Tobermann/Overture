@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Button,
   Form,
@@ -8,7 +9,7 @@ import {
 } from 'reactstrap';
 import { createItem } from '../helpers/data/itemsData';
 
-function ItemForm() {
+function ItemForm({ setItems }) {
   const [item, setItem] = useState({
     itemType: '',
     itemID: '',
@@ -24,23 +25,22 @@ function ItemForm() {
   const handleInputChange = (e) => {
     setItem((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.name === 'available' || e.target.name === 'rental' ? e.target.checked : e.taret.value
+      [e.target.name]: e.target.name === 'available' || e.target.name === 'rental' ? e.target.checked : e.target.value
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createItem(item).then((resp) => console.warn(resp));
+    createItem(item).then((resp) => setItems(resp));
+    console.warn(item);
   };
-
-  console.warn(item);
 
   return (
     <div>
      <Form>
       <FormGroup>
         <Label for="itemType">Item Type:</Label>
-        <Input type="text" name="itemType" id="itemType" placeholder="Instrument or bow" value={item.itemType} onChange={handleInputChange}/>
+        <Input type="text" name="itemType" id="itemType" placeholder="Instrument or bow" onChange={handleInputChange}/>
       </FormGroup>
       <FormGroup>
         <Label for="itemPrice">Price:</Label>
@@ -49,6 +49,10 @@ function ItemForm() {
       <FormGroup>
         <Label for="itemSize">Size:</Label>
         <Input type="text" name="size" id="itemSize" placeholder="Size" value={item.size} onChange={handleInputChange}/>
+      </FormGroup>
+      <FormGroup>
+        <Label for="type">Type:</Label>
+        <Input type="text" name="type" id="type" placeholder="Violin, Viola, Cello, Double Bass" value={item.type} onChange={handleInputChange}/>
       </FormGroup>
       <FormGroup>
         <Label for="item">Picture:</Label>
@@ -74,10 +78,14 @@ function ItemForm() {
           Available?
         </Label>
         </FormGroup>
-        <Button onSubmit={handleSubmit} type="submit">Submit</Button>
+        <Button onClick={handleSubmit} type="submit">Submit</Button>
       </Form>
     </div>
   );
 }
+
+ItemForm.propTypes = {
+  setItems: PropTypes.func
+};
 
 export default ItemForm;
