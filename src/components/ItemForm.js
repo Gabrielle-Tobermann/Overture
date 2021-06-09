@@ -8,12 +8,12 @@ import {
   Input
 } from 'reactstrap';
 import { createItem } from '../helpers/data/itemsData';
-import defineItemID from '../helpers/defineItemID';
 
 function ItemForm({ setItems, items }) {
+  const [instrumentID, setInstrumentID] = useState('');
   const [item, setItem] = useState({
     itemType: '',
-    itemID: '',
+    itemID: instrumentID,
     price: '',
     size: '',
     type: '',
@@ -23,21 +23,57 @@ function ItemForm({ setItems, items }) {
     image: ''
   });
 
-  defineItemID(items);
+  const defineID = () => {
+    const cellos = items.filter((element) => element.type === 'cello' || element.type === 'Cello');
+    const celloIDs = cellos.map((element) => element.itemID.split('C')[1]);
+    const celloID = celloIDs.length ? `C${Number(celloIDs[(celloIDs.length - 1)]) + 1}` : 'C1';
+    const violins = items.filter((element) => element.type === 'violin' || element.type === 'Violin');
+    const violinIDs = violins.map((element) => element.itemID.split('V')[1]);
+    const violinID = violinIDs.length ? `V${Number(violinIDs[(violinIDs.length - 1)]) + 1}` : '1';
+    const violas = items.filter((element) => element.type === 'viola' || element.type === 'Viola');
+    const violaIDs = violas.map((element) => element.itemID.split('VA')[1]);
+    const violaID = violaIDs.length ? `VA${Number(violaIDs[(violaIDs.length - 1)]) + 1}` : '1';
+    const doubleBasses = items.filter((element) => element.type === 'double bass' || element.type === 'Double Bass');
+    const doubleBassIDs = doubleBasses.map((element) => element.itemID.split('DB')[1]);
+    const doubleBassID = doubleBassIDs.length ? `DB${Number(doubleBassIDs[(doubleBassIDs.length - 1)]) + 1}` : '1';
+    let elementID = '';
+
+    switch (item.type) {
+      case 'cello':
+        elementID = celloID;
+        break;
+      case 'violin':
+        elementID = violinID;
+        break;
+      case 'viola':
+        elementID = violaID;
+        break;
+      case 'double bass':
+        elementID = doubleBassID;
+        break;
+      default:
+        elementID = '';
+    }
+    return elementID;
+  };
 
   const handleInputChange = (e) => {
+    setInstrumentID(defineID());
     setItem((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name === 'available' || e.target.name === 'rental' ? e.target.checked : e.target.value
     }));
+    console.warn(item);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.warn(item);
     createItem(item).then((resp) => setItems(resp));
   };
 
   return (
+    <>
     <div>
      <Form>
       <FormGroup>
@@ -61,14 +97,14 @@ function ItemForm({ setItems, items }) {
         <Input type="url" name="image" id="itemImage" placeholder="Enter link to picture" value={item.image} onChange={handleInputChange}/>
       </FormGroup>
       <FormGroup>
-        <Label for="itemID">ID of item:</Label>
-        <Input type="text" name="itemID" id="itemID" placeholder="Item ID" value={item.itemID} onChange={handleInputChange}/>
-      </FormGroup>
-      <FormGroup>
         <Label for="itemMaterial">Material:</Label>
         <Input type="text" name="material" id="itemMaterial" placeholder="Material" value={item.material} onChange={handleInputChange}/>
       </FormGroup>
-      <FormGroup check>
+      <FormGroup>
+        <Label for="itemID">Item ID:</Label>
+        <Input type="text" name="itemID" id="itemID" value={instrumentID} onChange={handleInputChange}/>
+      </FormGroup>
+      <FormGroup>
         <Label check>
           <Input type="checkbox" name="rental" value={item.rental} onChange={handleInputChange}/>
           Rental?
@@ -80,9 +116,11 @@ function ItemForm({ setItems, items }) {
           Available?
         </Label>
         </FormGroup>
+        <p>{instrumentID}</p>
         <Button onClick={handleSubmit} type="submit">Submit</Button>
       </Form>
     </div>
+    </>
   );
 }
 

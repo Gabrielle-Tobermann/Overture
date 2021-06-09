@@ -17,6 +17,7 @@ function InstrumentView({ items, setItems }) {
       <Button onClick={handleButtonClick}>+</Button>
       {adding && <ItemForm
       setItems={setItems}
+      items={items}
       />}
       {
         items.map((item) => (
