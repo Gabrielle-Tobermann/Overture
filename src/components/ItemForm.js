@@ -32,7 +32,6 @@ function ItemForm({ setItems }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     createItem(item).then((resp) => setItems(resp));
-    console.warn(item);
   };
 
   return (
