@@ -36,29 +36,32 @@ function ItemForm({ setItems, items }) {
     const doubleBasses = items.filter((element) => element.type === 'double bass' || element.type === 'Double Bass');
     const doubleBassIDs = doubleBasses.map((element) => element.itemID.split('DB')[1]);
     const doubleBassID = doubleBassIDs.length ? `DB${Number(doubleBassIDs[(doubleBassIDs.length - 1)]) + 1}` : '1';
-    let elementID = '';
 
     switch (item.type) {
       case 'cello':
-        elementID = celloID;
+        setInstrumentID(celloID);
         break;
       case 'violin':
-        elementID = violinID;
+        setInstrumentID(violinID);
         break;
       case 'viola':
-        elementID = violaID;
+        setInstrumentID(violaID);
         break;
       case 'double bass':
-        elementID = doubleBassID;
+        setInstrumentID(doubleBassID);
         break;
       default:
-        elementID = '';
+        setInstrumentID('');
     }
-    return elementID;
+    setItem((prevState) => ({
+      ...prevState,
+      itemID: instrumentID
+    }));
   };
 
+  console.warn(instrumentID);
   const handleInputChange = (e) => {
-    setInstrumentID(defineID());
+    defineID();
     setItem((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name === 'available' || e.target.name === 'rental' ? e.target.checked : e.target.value
