@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import firebase from 'firebase/app';
 import {
   Button,
   Form,
@@ -7,11 +8,27 @@ import {
   Input
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
+import { createOrder } from '../helpers/data/ordersData';
 
 function OrderForm() {
   const [itemInputs, setItemInputs] = useState([{
     itemID: '', id: uuidv4()
   }]);
+  const [order, setOrder] = useState({
+    fullName: '',
+    email: '',
+    renting: false,
+    transactionID: uuidv4(),
+    insurance: 0,
+    userID: firebase.auth().currentUser.uid
+  });
+
+  const handleOrderInputChange = (e) => {
+    setOrder((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }));
+  };
 
   const addNewField = () => {
     setItemInputs([...itemInputs, { id: uuidv4(), itemID: '' }]);
@@ -27,24 +44,45 @@ function OrderForm() {
     const newInputs = itemInputs.map((element) => {
       if (id === element.id) {
         const el = element;
-        el[e.target.name] = e.target.value;
+        if (el[e.target.name] === 'renting') {
+          el[e.target.name] = e.target.checked;
+        } else {
+          el[e.target.name] = e.target.value;
+        }
       }
-      console.warn(e.target.value);
       return element;
     });
     setItemInputs(newInputs);
-    console.warn(newInputs);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createOrder(order).then((resp) => console.warn(resp));
+  };
+
   return (
     <div>
        <Form>
        <FormGroup>
         <Label for="fullName">Customer&apos;s Full Name:</Label>
-        <Input type="text" name="fullName" id="fullName" placeholder="Enter name" />
+        <Input
+        type="text"
+        name="fullName"
+        id="fullName"
+        placeholder="Enter name"
+        value={order.fullName}
+        onChange={handleOrderInputChange}
+        />
       </FormGroup>
       <FormGroup>
         <Label for="email">Customer&apos;s Email:</Label>
-        <Input type="email" name="email" id="email" placeholder="Enter email" />
+        <Input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Enter email"
+        value={order.email}
+        onChange={handleOrderInputChange}/>
       </FormGroup>
       <div>
         {
@@ -68,13 +106,15 @@ function OrderForm() {
       </div>
       <FormGroup>
         <Label for="email">Insurance Amount:</Label>
-        <Input type="text" name="insurance" id="insurance" placeholder="Enter insurance amount" />
+        <Input
+        type="text"
+        name="insurance"
+        id="insurance"
+        value={order.insurance}
+        onChange={handleOrderInputChange}
+        />
       </FormGroup>
-      <FormGroup>
-        <Label for="email">Payment Amount:</Label>
-        <Input type="text" name="insurance" id="insurance" placeholder="Enter insurance amount" />
-      </FormGroup>
-      <Button type="submit">Submit</Button>
+      <Button type="submit" onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>
   );

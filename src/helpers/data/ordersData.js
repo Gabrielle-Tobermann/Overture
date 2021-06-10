@@ -15,7 +15,7 @@ const getOrders = () => new Promise((resolve, reject) => {
 });
 
 const createOrder = (orderObj) => new Promise((resolve, reject) => {
-  axios.create(`${dbURL}/orders.json`, orderObj)
+  axios.post(`${dbURL}/orders.json`, orderObj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbURL}/orders/${response.data.name}.json`, body);
