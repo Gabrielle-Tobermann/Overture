@@ -8,7 +8,7 @@ import {
   Input
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { createOrder, createPaymentIntent } from '../helpers/data/ordersData';
+import { createOrder } from '../helpers/data/ordersData';
 import StripePaymentInfo from './StripePaymentInfo';
 
 function OrderForm() {
@@ -21,7 +21,6 @@ function OrderForm() {
   const [order, setOrder] = useState({
     fullName: '',
     email: '',
-    renting: false,
     transactionID: uuidv4(),
     insurance: 0,
     userID: firebase.auth().currentUser.uid
@@ -76,7 +75,13 @@ function OrderForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createOrder(order).then((resp) => console.warn(resp));
-    createPaymentIntent(paymentAmount);
+    itemInputs.forEach((item) => {
+      async function product() {
+        await stripe.products.create({
+          name: item.itemID
+        });
+      }
+    });
   };
 
   return (
