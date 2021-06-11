@@ -15,6 +15,9 @@ function OrderForm() {
   const [itemInputs, setItemInputs] = useState([{
     itemID: '', id: uuidv4()
   }]);
+  const [paymentAmount, setPaymentAmount] = useState({
+    amount: ''
+  });
   const [order, setOrder] = useState({
     fullName: '',
     email: '',
@@ -23,33 +26,14 @@ function OrderForm() {
     insurance: 0,
     userID: firebase.auth().currentUser.uid
   });
-  const [paymentAmount, setPaymentAmount] = useState({
-    amount: 0
-  });
 
-  // const handleOrderChange = (e) => {
-  //   setOrder((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value
-  //   }));
-  //   console.warn('value', e.target.value);
-  //   console.warn('amount', paymentAmount);
-  // };
-
-  const handleAmountInputChange = (e) => {
+  const handleInputChange = (e) => {
     if (e.target.name === 'amount') {
       setPaymentAmount((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
       }));
-      setOrder({
-        fullName: '',
-        email: '',
-        renting: false,
-        transactionID: uuidv4(),
-        insurance: 0,
-        userID: firebase.auth().currentUser.uid
-      });
+      setOrder((prevState) => prevState);
     } else {
       setOrder((prevState) => ({
         ...prevState,
@@ -59,9 +43,9 @@ function OrderForm() {
         amount: 0
       });
     }
-    debugger;
     console.warn('value', e.target.value);
-    console.warn('amount', paymentAmount);
+    console.warn(paymentAmount);
+    console.warn(order);
   };
 
   const addNewField = () => {
@@ -106,7 +90,7 @@ function OrderForm() {
         id="fullName"
         placeholder="Enter name"
         value={order.fullName}
-        onChange={handleAmountInputChange}
+        onChange={handleInputChange}
         />
       </FormGroup>
       <FormGroup>
@@ -117,7 +101,7 @@ function OrderForm() {
         id="email"
         placeholder="Enter email"
         value={order.email}
-        onChange={handleAmountInputChange}/>
+        onChange={handleInputChange}/>
       </FormGroup>
       <div>
         {
@@ -130,7 +114,7 @@ function OrderForm() {
               id={item.id}
               placeholder="Enter item ID"
               value={item.itemID}
-              onChange={handleItemInputChange}
+              onChange={(e) => handleItemInputChange(item.id, e)}
               />
               </FormGroup>
               <Button onClick={addNewField}>+</Button>
@@ -140,23 +124,23 @@ function OrderForm() {
         }
       </div>
       <FormGroup>
+        <Label for="amount">Payment Amount:</Label>
+        <Input
+        type="text"
+        name="amount"
+        id="amount"
+        value={paymentAmount.amount}
+        onChange={handleInputChange}
+        />
+      </FormGroup>
+      <FormGroup>
         <Label for="insurance">Insurance Amount:</Label>
         <Input
         type="text"
         name="insurance"
         id="insurance"
         value={order.insurance}
-        onChange={handleAmountInputChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="amount">Payment Amount:</Label>
-        <Input
-        type="number"
-        name="amount"
-        id="amount"
-        value={paymentAmount.amount}
-        onChange={handleAmountInputChange}
+        onChange={handleInputChange}
         />
       </FormGroup>
       <StripePaymentInfo />
