@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import Footer from '../components/Footer';
 import Routes from '../helpers/routes';
 import NavBar from '../components/Navbar';
 import './App.scss';
 import { getItems } from '../helpers/data/itemsData';
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function App() {
   const [user, setUser] = useState(null);
@@ -16,23 +20,9 @@ function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed && (authed.uid === process.env.REACT_APP_ADMIN_UID)) {
-        // const userObj = {
-        //   fullName: authed.displayName,
-        //   profilePicture: authed.photoURL,
-        //   uid: authed.uid,
-        //   user: authed.email.split('@')[0],
-        //   admin: true
-        // };
         setUser(false);
         setAdmin(true);
       } else if (authed && authed.uid !== process.env.REACT_ADMIN_UID) {
-        // const userObj = {
-        //   fullName: authed.displayName,
-        //   profilePicture: authed.photoURL,
-        //   uid: authed.uid,
-        //   user: authed.email.split('@')[0],
-        //   admin: false
-        // };
         setAdmin(false);
         setUser(true);
       } else if ((admin || admin === null) || (user || user === null)) {
@@ -53,12 +43,14 @@ function App() {
       user={user}
       admin={admin}
       />
-      <Routes
-      user={user}
-      admin={admin}
-      items={items}
-      setItems={setItems}
-      />
+      <Elements stripe={stripePromise}>
+        <Routes
+        user={user}
+        admin={admin}
+        items={items}
+        setItems={setItems}
+        />
+      </Elements>
     </Router>
     <Footer/>
     </div>

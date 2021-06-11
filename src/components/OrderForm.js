@@ -8,7 +8,8 @@ import {
   Input
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { createOrder } from '../helpers/data/ordersData';
+import { createOrder, createPaymentIntent } from '../helpers/data/ordersData';
+import StripePaymentInfo from './StripePaymentInfo';
 
 function OrderForm() {
   const [itemInputs, setItemInputs] = useState([{
@@ -22,12 +23,45 @@ function OrderForm() {
     insurance: 0,
     userID: firebase.auth().currentUser.uid
   });
+  const [paymentAmount, setPaymentAmount] = useState({
+    amount: 0
+  });
 
-  const handleOrderInputChange = (e) => {
-    setOrder((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }));
+  // const handleOrderChange = (e) => {
+  //   setOrder((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value
+  //   }));
+  //   console.warn('value', e.target.value);
+  //   console.warn('amount', paymentAmount);
+  // };
+
+  const handleAmountInputChange = (e) => {
+    if (e.target.name === 'amount') {
+      setPaymentAmount((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+      setOrder({
+        fullName: '',
+        email: '',
+        renting: false,
+        transactionID: uuidv4(),
+        insurance: 0,
+        userID: firebase.auth().currentUser.uid
+      });
+    } else {
+      setOrder((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+      setPaymentAmount({
+        amount: 0
+      });
+    }
+    debugger;
+    console.warn('value', e.target.value);
+    console.warn('amount', paymentAmount);
   };
 
   const addNewField = () => {
@@ -58,6 +92,7 @@ function OrderForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createOrder(order).then((resp) => console.warn(resp));
+    createPaymentIntent(paymentAmount);
   };
 
   return (
@@ -71,7 +106,7 @@ function OrderForm() {
         id="fullName"
         placeholder="Enter name"
         value={order.fullName}
-        onChange={handleOrderInputChange}
+        onChange={handleAmountInputChange}
         />
       </FormGroup>
       <FormGroup>
@@ -82,7 +117,7 @@ function OrderForm() {
         id="email"
         placeholder="Enter email"
         value={order.email}
-        onChange={handleOrderInputChange}/>
+        onChange={handleAmountInputChange}/>
       </FormGroup>
       <div>
         {
@@ -95,7 +130,7 @@ function OrderForm() {
               id={item.id}
               placeholder="Enter item ID"
               value={item.itemID}
-              onChange={(e) => handleItemInputChange(item.id, e)}
+              onChange={handleItemInputChange}
               />
               </FormGroup>
               <Button onClick={addNewField}>+</Button>
@@ -105,15 +140,26 @@ function OrderForm() {
         }
       </div>
       <FormGroup>
-        <Label for="email">Insurance Amount:</Label>
+        <Label for="insurance">Insurance Amount:</Label>
         <Input
         type="text"
         name="insurance"
         id="insurance"
         value={order.insurance}
-        onChange={handleOrderInputChange}
+        onChange={handleAmountInputChange}
         />
       </FormGroup>
+      <FormGroup>
+        <Label for="amount">Payment Amount:</Label>
+        <Input
+        type="number"
+        name="amount"
+        id="amount"
+        value={paymentAmount.amount}
+        onChange={handleAmountInputChange}
+        />
+      </FormGroup>
+      <StripePaymentInfo />
       <Button type="submit" onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>

@@ -24,4 +24,8 @@ const createOrder = (orderObj) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getOrders, createOrder };
+async function createPaymentIntent(paymentAmount) {
+  await axios.post('/api/payment_intents', { amount: paymentAmount * 100 });
+}
+
+export { getOrders, createOrder, createPaymentIntent };
