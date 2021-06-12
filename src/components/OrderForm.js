@@ -75,13 +75,13 @@ function OrderForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createOrder(order).then((resp) => console.warn(resp));
-    itemInputs.forEach((item) => {
-      async function product() {
-        await stripe.products.create({
-          name: item.itemID
-        });
-      }
-    });
+  //   itemInputs.forEach((item) => {
+  //     async function product() {
+  //       await stripe.products.create({
+  //         name: item.itemID
+  //       });
+  //     }
+  //   });
   };
 
   return (
