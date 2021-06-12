@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const products = axios('https://overture-7097e-default-rtdb.firebaseio.com/items')
   .then((response) => response.json())
