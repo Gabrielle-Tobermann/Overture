@@ -24,8 +24,10 @@ const createOrder = (orderObj) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-async function createPaymentIntent(paymentAmount) {
-  await axios.post('/api/payment_intents', { amount: paymentAmount * 100 });
-}
+const createCheckout = (data) => new Promise((resolve, reject) => {
+  axios.post('/.netlify/functions/create-checkout', JSON.stringify(data))
+    .then((resp) => resolve(resp.data))
+    .catch((error) => reject(error));
+});
 
-export { getOrders, createOrder, createPaymentIntent };
+export { getOrders, createOrder, createCheckout };

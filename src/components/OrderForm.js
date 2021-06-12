@@ -8,7 +8,7 @@ import {
   Input
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { createOrder } from '../helpers/data/ordersData';
+import { createCheckout, createOrder } from '../helpers/data/ordersData';
 import StripePaymentInfo from './StripePaymentInfo';
 
 function OrderForm() {
@@ -42,9 +42,6 @@ function OrderForm() {
         amount: 0
       });
     }
-    console.warn('value', e.target.value);
-    console.warn(paymentAmount);
-    console.warn(order);
   };
 
   const addNewField = () => {
@@ -72,17 +69,30 @@ function OrderForm() {
     setItemInputs(newInputs);
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
+  // figure out the create-checkout form first with the docs
+  // https://stripe.com/docs/checkout/integration-builder
+  // tutorial: https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/?utm_source=blog&utm_medium=stripe-jl&utm_campaign=devex
+
     e.preventDefault();
+    const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+
     createOrder(order).then((resp) => console.warn(resp));
-  //   itemInputs.forEach((item) => {
-  //     async function product() {
-  //       await stripe.products.create({
-  //         name: item.itemID
-  //       });
-  //     }
-  //   });
-  };
+
+    const data = {
+      products: itemInputs,
+      quantity: itemInputs.length
+    };
+    createCheckout(data).then((resp) => resp.json());
+
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: session.id
+    });
+
+    if (error) {
+      console.warn(error);
+    }
+  }
 
   return (
     <div>
