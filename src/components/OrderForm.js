@@ -9,15 +9,15 @@ import {
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import fetch from 'node-fetch';
-import StripePaymentInfo from './StripePaymentInfo';
 
 function OrderForm() {
-  const [itemInputs, setItemInputs] = useState([{
-    itemID: '', id: uuidv4()
-  }]);
+  // const [itemInputs, setItemInputs] = useState([{
+  //   itemID: '', id: uuidv4()
+  // }]);
   const [paymentAmount, setPaymentAmount] = useState({
-    amount: ''
+    amount: '', itemID: ''
   });
+
   const [order, setOrder] = useState({
     fullName: '',
     email: '',
@@ -44,46 +44,38 @@ function OrderForm() {
     }
   };
 
-  const addNewField = () => {
-    setItemInputs([...itemInputs, { id: uuidv4(), itemID: '' }]);
-  };
+  // const addNewField = () => {
+  //   setItemInputs([...itemInputs, { id: uuidv4(), itemID: '' }]);
+  // };
 
-  const removeField = (id) => {
-    const inputs = [...itemInputs];
-    inputs.splice(inputs.findIndex((element) => element.id === id));
-    setItemInputs(inputs);
-  };
+  // const removeField = (id) => {
+  //   const inputs = [...itemInputs];
+  //   inputs.splice(inputs.findIndex((element) => element.id === id));
+  //   setItemInputs(inputs);
+  // };
 
-  const handleItemInputChange = (id, e) => {
-    const newInputs = itemInputs.map((element) => {
-      if (id === element.id) {
-        const el = element;
-        if (el[e.target.name] === 'renting') {
-          el[e.target.name] = e.target.checked;
-        } else {
-          el[e.target.name] = e.target.value;
-        }
-      }
-      return element;
-    });
-    setItemInputs(newInputs);
-  };
+  // const handleItemInputChange = (id, e) => {
+  //   const newInputs = itemInputs.map((element) => {
+  //     if (id === element.id) {
+  //       const el = element;
+  //       if (el[e.target.name] === 'renting') {
+  //         el[e.target.name] = e.target.checked;
+  //       } else {
+  //         el[e.target.name] = e.target.value;
+  //       }
+  //     }
+  //     return element;
+  //   });
+  //   setItemInputs(newInputs);
+  // };
 
   async function handleSubmit(e) {
     e.preventDefault();
     const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
-    // const data = [];
-    // itemInputs.map((item) => data.push({
-    //   sku: item.itemID,
-    //   quantity: 1
-    // }));
     const data = {
-      sku: 'VB1',
+      sku: 'C4',
       quantity: 1
     };
-
-    console.warn('data', data);
-
     const response = await fetch('/.netlify/functions/create-checkout', {
       method: 'POST',
       headers: {
@@ -125,8 +117,18 @@ function OrderForm() {
         value={order.email}
         onChange={handleInputChange}/>
       </FormGroup>
+      <FormGroup>
+        <Label for="item">Item</Label>
+        <Input
+        type="text"
+        name="itemID"
+        id="orderItemID"
+        placeholder="Enter item ID"
+        value={paymentAmount.itemID}
+        onChange={handleInputChange}/>
+      </FormGroup>
       <div>
-        {
+        {/* {
           itemInputs.map((item) => (
             <div key={item.id}>
               <FormGroup>
@@ -143,14 +145,14 @@ function OrderForm() {
               <Button onClick={removeField}>-</Button>
             </div>
           ))
-        }
+        } */}
       </div>
       <FormGroup>
         <Label for="amount">Payment Amount:</Label>
         <Input
-        type="text"
+        type="number"
         name="amount"
-        id="amount"
+        id="orderAmount"
         value={paymentAmount.amount}
         onChange={handleInputChange}
         />
@@ -165,7 +167,6 @@ function OrderForm() {
         onChange={handleInputChange}
         />
       </FormGroup>
-      <StripePaymentInfo />
       <Button type="submit" onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>
