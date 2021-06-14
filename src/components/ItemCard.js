@@ -43,8 +43,8 @@ function ItemCard({
   };
 
   return (
-    <div>
-        <Card body>
+    <div style={{ width: 'min-content', margin: '2%' }}>
+        <Card body style={{ width: 'fit-content', border: 'solid 1px black' }}>
           <button className='cardButton' id={itemID}>{itemID}</button>
           <Popover
             placement="right"
