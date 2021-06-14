@@ -105,7 +105,6 @@ function ItemForm({
   };
 
   const handleInputChange = (e) => {
-    debugger;
     if (item.firebaseKey === null) {
       defineID();
     }
