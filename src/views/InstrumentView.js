@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import ItemCard from '../components/ItemCard';
 import ItemForm from '../components/ItemForm';
+import CardContainer from '../styles/itemCardStyle';
 
 function InstrumentView({ items, setItems }) {
   const [adding, setAdding] = useState(false);
@@ -19,6 +20,7 @@ function InstrumentView({ items, setItems }) {
       setItems={setItems}
       items={items}
       />}
+      <CardContainer>
       {
         items.map((item) => (
           item.itemType === 'instrument'
@@ -40,6 +42,7 @@ function InstrumentView({ items, setItems }) {
             : ''
         ))
       }
+      </CardContainer>
     </div>
   );
 }

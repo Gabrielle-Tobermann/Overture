@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Card,
   Button,
-  Row,
-  Col,
   Popover,
   PopoverHeader,
   PopoverBody
@@ -46,10 +44,8 @@ function ItemCard({
 
   return (
     <div>
-       <Row>
-      <Col sm="6">
         <Card body>
-          <Button id={itemID}>{itemID}</Button>
+          <button className='cardButton' id={itemID}>{itemID}</button>
           <Popover
             placement="right"
             isOpen={popoverOpen}
@@ -71,8 +67,6 @@ function ItemCard({
             </PopoverBody>
           </Popover>
         </Card>
-      </Col>
-    </Row>
     {
     editing && <ItemForm
                 items={items}

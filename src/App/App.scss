@@ -27,3 +27,14 @@
   justify-content: space-between;
   width: 100%;
 }
+
+.cardButton {
+  background: transparent;
+  border: none;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  :focus {
+    outline: none;
+  }
+}
