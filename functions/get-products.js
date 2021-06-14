@@ -14,4 +14,4 @@ exports.handler = async () => {
   };
 };
 
-export default getProducts;
+module.exports = getProducts;

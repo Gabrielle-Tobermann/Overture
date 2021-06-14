@@ -8,7 +8,8 @@ import {
   Input
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { createCheckout, createOrder } from '../helpers/data/ordersData';
+import fetch from 'node-fetch';
+// import { createOrder } from '../helpers/data/ordersData';
 import StripePaymentInfo from './StripePaymentInfo';
 
 function OrderForm() {
@@ -75,21 +76,31 @@ function OrderForm() {
   // tutorial: https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/?utm_source=blog&utm_medium=stripe-jl&utm_campaign=devex
 
     e.preventDefault();
-    createOrder(order).then((resp) => console.warn(resp));
     const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
-    const data = [];
-    itemInputs.map((item) => data.push({
-      sku: item.itemID,
+    // const data = [];
+    // itemInputs.map((item) => data.push({
+    //   sku: item.itemID,
+    //   quantity: 1
+    // }));
+    const data = {
+      sku: 'VB1',
       quantity: 1
-    }));
+    };
+
     console.warn('data', data);
 
-    createCheckout(data).then((resp) => resp.json());
+    const response = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((res) => res.json());
 
-    const response = await createCheckout(data);
+    // const response = await createCheckout(data).then((resp) => resp.json());
 
     const { error } = await stripe.redirectToCheckout({
-      sessionId: response.session.id
+      sessionId: response.sessionId
     });
 
     if (error) {
