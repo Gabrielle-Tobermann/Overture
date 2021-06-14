@@ -75,18 +75,21 @@ function OrderForm() {
   // tutorial: https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/?utm_source=blog&utm_medium=stripe-jl&utm_campaign=devex
 
     e.preventDefault();
-    const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
-
     createOrder(order).then((resp) => console.warn(resp));
+    const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+    const data = [];
+    itemInputs.map((item) => data.push({
+      sku: item.itemID,
+      quantity: 1
+    }));
+    console.warn('data', data);
 
-    const data = {
-      products: itemInputs,
-      quantity: itemInputs.length
-    };
     createCheckout(data).then((resp) => resp.json());
 
+    const response = await createCheckout(data);
+
     const { error } = await stripe.redirectToCheckout({
-      sessionId: session.id
+      sessionId: response.session.id
     });
 
     if (error) {

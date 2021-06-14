@@ -25,9 +25,13 @@ const createOrder = (orderObj) => new Promise((resolve, reject) => {
 });
 
 const createCheckout = (data) => new Promise((resolve, reject) => {
+  console.warn('createCheckout promise');
   axios.post('/.netlify/functions/create-checkout', JSON.stringify(data))
     .then((resp) => resolve(resp.data))
-    .catch((error) => reject(error));
+    .catch((error) => {
+      reject(error);
+      console.warn('creacteCheckout thorws an error');
+    });
 });
 
 export { getOrders, createOrder, createCheckout };

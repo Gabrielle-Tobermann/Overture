@@ -6,6 +6,7 @@ import BowView from '../views/BowView';
 import FinancialReportsView from '../views/FinancialReportsView';
 import InstrumentView from '../views/InstrumentView';
 import OrderView from '../views/OrderView';
+import Success from '../components/Success';
 
 const PrivateRoute = ({
   component: Component, user, admin, ...rest
@@ -63,6 +64,9 @@ function Routes({
         <PrivateRoute exact path='/financial-reports'
         component={FinancialReportsView}
         admin={admin}
+        />
+        <Route exact path='success'
+        component={Success}
         />
       </Switch>
     </div>

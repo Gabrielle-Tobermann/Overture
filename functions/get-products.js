@@ -13,3 +13,5 @@ exports.handler = async () => {
     body: JSON.stringify(data)
   };
 };
+
+export default getProducts;
