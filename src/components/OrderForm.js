@@ -9,7 +9,6 @@ import {
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import fetch from 'node-fetch';
-// import { createOrder } from '../helpers/data/ordersData';
 import StripePaymentInfo from './StripePaymentInfo';
 
 function OrderForm() {
@@ -71,10 +70,6 @@ function OrderForm() {
   };
 
   async function handleSubmit(e) {
-  // figure out the create-checkout form first with the docs
-  // https://stripe.com/docs/checkout/integration-builder
-  // tutorial: https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/?utm_source=blog&utm_medium=stripe-jl&utm_campaign=devex
-
     e.preventDefault();
     const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
     // const data = [];
@@ -96,8 +91,6 @@ function OrderForm() {
       },
       body: JSON.stringify(data),
     }).then((res) => res.json());
-
-    // const response = await createCheckout(data).then((resp) => resp.json());
 
     const { error } = await stripe.redirectToCheckout({
       sessionId: response.sessionId

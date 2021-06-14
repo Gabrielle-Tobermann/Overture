@@ -9,12 +9,10 @@ const inventory = [];
 getProducts().then((resp) => inventory.push(resp.data));
 
 exports.handler = async (event) => {
+  // The 2 lines below aren't doing anything, I am still working through that. Line 13 is from the tutorial, I need to replace it with something that is  actually storing the values from the form.
   const sku = JSON.parse(event.body);
-  console.warn('sku', sku);
   const product = inventory.map((item) => item.itemID === sku);
   console.warn('product', product);
-  // Not sure if I need a valid quantity for this to work. I'm thinking not.
-  // const validatedQuantity = quantity > 0 && quantity < 11 ? quantity : 1;
   // Attempting to pass multiple items to line_items in the checkout seesion
   // const lineItems = [];
   // products.forEach((item) => {
@@ -29,7 +27,7 @@ exports.handler = async (event) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     // process.env.URL is set by Netlify.
-    success_url: `${process.env.URL}/success.html`,
+    success_url: `${process.env.URL}/success`,
     cancel_url: process.env.URL,
     // stripe docs describe line_items as the list of items but I can't figure out how to dynamically add items if there are multiple items in an order.
     // Having issues grabbing those values from the product above.
