@@ -17,7 +17,7 @@ function InstrumentView({ items, setItems }) {
   return (
     <div>
       <ViewTitle>Instrument Inventory</ViewTitle>
-      <Button onClick={handleButtonClick}>+</Button>
+      <Button color="dark" onClick={handleButtonClick}>+</Button>
       {adding && <ItemForm
       setItems={setItems}
       items={items}

@@ -34,6 +34,12 @@ const ViewTitle = styled.h1`
   margin-top: 2%;
   margin-bottom: 2%;
 `;
+
+const AddButton = styled.button`
+  background-color: black;
+  border-radius: 50%;
+  font-size: 16px;
+`;
 export {
-  CardContainer, InstrumentCard, WholeCardContainer, IndividualCard, InstrumentTitle, ViewTitle
+  CardContainer, InstrumentCard, WholeCardContainer, IndividualCard, InstrumentTitle, ViewTitle, AddButton
 };
