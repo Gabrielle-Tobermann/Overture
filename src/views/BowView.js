@@ -34,6 +34,8 @@ function BowView({ items, setItems }) {
             firebaseKey={item.firebaseKey}
             setItems={setItems}
             items={items}
+            itemType={item.itemType}
+            material={item.material}
             />
             : ''
         ))

@@ -22,7 +22,9 @@ function ItemCard({
   available,
   firebaseKey,
   setItems,
-  items
+  items,
+  itemType,
+  material
 }) {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -75,6 +77,16 @@ function ItemCard({
     editing && <ItemForm
                 items={items}
                 setItems={setItems}
+                avaialble={available}
+                firebaseKey={firebaseKey}
+                image={image}
+                itemID={itemID}
+                itemType={itemType}
+                material={material}
+                price={price}
+                rental={rental}
+                size={size}
+                type={type}
                 />
     }
     </div>
@@ -92,6 +104,8 @@ ItemCard.propTypes = {
   firebaseKey: PropTypes.string,
   setItems: PropTypes.func,
   items: PropTypes.array,
+  itemType: PropTypes.string,
+  material: PropTypes.string,
 };
 
 export default ItemCard;

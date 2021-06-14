@@ -7,20 +7,34 @@ import {
   Label,
   Input
 } from 'reactstrap';
-import { createItem } from '../helpers/data/itemsData';
+import { createItem, updateItem } from '../helpers/data/itemsData';
 
-function ItemForm({ setItems, items }) {
+function ItemForm({
+  setItems,
+  items,
+  available,
+  firebaseKey,
+  image,
+  itemID,
+  itemType,
+  material,
+  price,
+  rental,
+  size,
+  type
+}) {
   const [elementID, setElementID] = useState('');
   const [item, setItem] = useState({
-    itemType: '',
-    itemID: elementID,
-    price: '',
-    size: '',
-    type: '',
-    available: false,
-    rental: false,
-    material: '',
-    image: ''
+    itemType: itemType || '',
+    itemID: itemID || elementID,
+    price: price || '',
+    size: size || '',
+    type: type || '',
+    available: available || false,
+    rental: rental || false,
+    material: material || '',
+    image: image || '',
+    firebaseKey: firebaseKey || null
   });
 
   const defineID = () => {
@@ -91,7 +105,10 @@ function ItemForm({ setItems, items }) {
   };
 
   const handleInputChange = (e) => {
-    defineID();
+    debugger;
+    if (item.firebaseKey === null) {
+      defineID();
+    }
     setItem((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name === 'available' || e.target.name === 'rental' ? e.target.checked : e.target.value
@@ -100,7 +117,11 @@ function ItemForm({ setItems, items }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createItem(item).then((resp) => setItems(resp));
+    if (item.firebaseKey) {
+      updateItem(item).then((resp) => setItems(resp));
+    } else {
+      createItem(item).then((resp) => setItems(resp));
+    }
   };
 
   return (
@@ -133,7 +154,7 @@ function ItemForm({ setItems, items }) {
       </FormGroup>
       <FormGroup>
         <Label for="itemID">Item ID:</Label>
-        <Input type="text" name="itemID" id="itemID" value={elementID} onChange={handleInputChange}/>
+        <Input type="text" name="itemID" id="itemID" value={item.firebaseKey ? itemID : elementID} onChange={handleInputChange}/>
       </FormGroup>
       <FormGroup>
         <Label check>
@@ -156,7 +177,17 @@ function ItemForm({ setItems, items }) {
 
 ItemForm.propTypes = {
   setItems: PropTypes.func,
-  items: PropTypes.array
+  items: PropTypes.array,
+  available: PropTypes.bool,
+  firebaseKey: PropTypes.string,
+  image: PropTypes.string,
+  itemID: PropTypes.string,
+  itemType: PropTypes.string,
+  material: PropTypes.string,
+  price: PropTypes.string,
+  rental: PropTypes.bool,
+  size: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default ItemForm;
