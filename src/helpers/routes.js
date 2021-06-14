@@ -65,7 +65,7 @@ function Routes({
         component={FinancialReportsView}
         admin={admin}
         />
-        <Route exact path='success'
+        <Route exact path='/success'
         component={Success}
         />
       </Switch>
