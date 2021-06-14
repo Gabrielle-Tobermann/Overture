@@ -25,6 +25,15 @@ function BowView({ items, setItems }) {
             ? <ItemCard
             key={item.firebaseKey}
             itemID={item.itemID}
+            image={item.image}
+            type={item.type}
+            size={item.size}
+            rental={item.rental}
+            price={item.price}
+            available={item.available}
+            firebaseKey={item.firebaseKey}
+            setItems={setItems}
+            items={items}
             />
             : ''
         ))
