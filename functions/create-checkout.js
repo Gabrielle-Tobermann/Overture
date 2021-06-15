@@ -10,8 +10,8 @@ getProducts().then((resp) => inventory.push(resp.data));
 
 exports.handler = async (req) => {
   // The 2 lines below aren't doing anything, I am still working through that. Line 13 is from the tutorial, I need to replace it with something that is  actually storing the values from the form.
-  const sku = req.body;
-  const product = inventory.find((p) => p.itemID === sku);
+  const item = req.body;
+  const product = inventory.find((p) => p.itemID === item);
   // Attempting to pass multiple items to line_items in the checkout seesion
   // const lineItems = [];
   // products.forEach((item) => {
