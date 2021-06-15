@@ -9,39 +9,31 @@ import {
 } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import fetch from 'node-fetch';
+import { encode } from 'querystring';
 
 function OrderForm() {
   // const [itemInputs, setItemInputs] = useState([{
   //   itemID: '', id: uuidv4()
   // }]);
-  const [paymentAmount, setPaymentAmount] = useState({
-    amount: '', itemID: ''
-  });
+  // const [paymentAmount, setPaymentAmount] = useState({
+  //   amount: '', itemID: ''
+  // });
 
   const [order, setOrder] = useState({
     fullName: '',
     email: '',
     transactionID: uuidv4(),
     insurance: 0,
+    itemID: '',
+    amount: '',
     userID: firebase.auth().currentUser.uid
   });
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'amount') {
-      setPaymentAmount((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-      }));
-      setOrder((prevState) => prevState);
-    } else {
-      setOrder((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-      }));
-      setPaymentAmount({
-        amount: 0
-      });
-    }
+    setOrder((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }));
   };
 
   // const addNewField = () => {
@@ -72,16 +64,12 @@ function OrderForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     const stripe = window.Stripe(process.env.REACT_APP_PUBLISHABLE_KEY);
-    const data = {
-      sku: 'C4',
-      quantity: 1
-    };
     const response = await fetch('/.netlify/functions/create-checkout', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify(data),
+      body: encode({ 'form-name': 'orderForm', ...order }),
     }).then((res) => res.json());
 
     const { error } = await stripe.redirectToCheckout({
@@ -95,7 +83,8 @@ function OrderForm() {
 
   return (
     <div>
-       <Form>
+       <Form name="orderForm" method="post">
+         <input type="hidden" name="form-name" value="orderForm"/>
        <FormGroup>
         <Label for="fullName">Customer&apos;s Full Name:</Label>
         <Input
@@ -124,7 +113,7 @@ function OrderForm() {
         name="itemID"
         id="orderItemID"
         placeholder="Enter item ID"
-        value={paymentAmount.itemID}
+        value={order.itemID}
         onChange={handleInputChange}/>
       </FormGroup>
       <div>
@@ -150,10 +139,10 @@ function OrderForm() {
       <FormGroup>
         <Label for="amount">Payment Amount:</Label>
         <Input
-        type="number"
+        type="text"
         name="amount"
         id="orderAmount"
-        value={paymentAmount.amount}
+        value={order.amount}
         onChange={handleInputChange}
         />
       </FormGroup>
