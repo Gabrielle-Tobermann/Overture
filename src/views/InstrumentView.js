@@ -17,7 +17,7 @@ function InstrumentView({ items, setItems }) {
   return (
     <div>
       <ViewTitle>Instrument Inventory</ViewTitle>
-      <Button color="dark" onClick={handleButtonClick}>+</Button>
+      <Button color="dark" style={{ fontSize: '20px' }} onClick={handleButtonClick}>+</Button>
       {adding && <ItemForm
       setItems={setItems}
       items={items}
@@ -42,7 +42,6 @@ function InstrumentView({ items, setItems }) {
             setItems={setItems}
             items={items}
             itemType={item.itemType}
-            material={item.material}
             />
             : ''
         ))
@@ -69,7 +68,6 @@ function InstrumentView({ items, setItems }) {
             setItems={setItems}
             items={items}
             itemType={item.itemType}
-            material={item.material}
             />
             : ''
         ))
@@ -95,7 +93,6 @@ function InstrumentView({ items, setItems }) {
             setItems={setItems}
             items={items}
             itemType={item.itemType}
-            material={item.material}
             />
             : ''
         ))
@@ -121,7 +118,6 @@ function InstrumentView({ items, setItems }) {
             setItems={setItems}
             items={items}
             itemType={item.itemType}
-            material={item.material}
             />
             : ''
         ))

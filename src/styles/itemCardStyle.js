@@ -40,6 +40,33 @@ const AddButton = styled.button`
   border-radius: 50%;
   font-size: 16px;
 `;
+
+const PopImage = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
+const Ulist = styled.ul`
+  list-style-type: none;
+  font-size: 16px;
+  text-align: center;
+  padding-left: 0;
+`;
 export {
-  CardContainer, InstrumentCard, WholeCardContainer, IndividualCard, InstrumentTitle, ViewTitle, AddButton
+  CardContainer,
+  InstrumentCard,
+  WholeCardContainer,
+  IndividualCard,
+  InstrumentTitle,
+  ViewTitle,
+  AddButton,
+  PopImage,
+  ButtonContainer,
+  Ulist
 };

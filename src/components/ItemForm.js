@@ -141,7 +141,7 @@ function ItemForm({
       </FormGroup>
       <FormGroup>
         <Label for="type">Type:</Label>
-        <Input type="text" name="type" id="type" placeholder="Violin, Viola, Cello, Double Bass" value={item.type} onChange={handleInputChange}/>
+        <Input type="text" name="type" id="type" placeholder="violin, viola, cello, double bass" value={item.type} onChange={handleInputChange}/>
       </FormGroup>
       <FormGroup>
         <Label for="item">Picture:</Label>

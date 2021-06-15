@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import { deleteItem } from '../helpers/data/itemsData';
 import ItemForm from './ItemForm';
+import { ButtonContainer, PopImage, Ulist } from '../styles/itemCardStyle';
 
 function ItemCard({
   itemID,
@@ -54,16 +55,21 @@ function ItemCard({
             >
             <PopoverHeader>{itemID}</PopoverHeader>
             <PopoverBody>
-              <ul>
-               <img src={image}/>
+              <Ulist>
+               <PopImage src={image}/>
                <li>{type}</li>
                <li>{size}</li>
+               {
+                <li>{material}</li>
+               }
                <li>{rental ? 'rental' : 'purchase'}</li>
-               <li>{price}</li>
+               <li>${price}</li>
                <li>{available ? 'Available' : 'Not available'}</li>
-              </ul>
-              <Button onClick={() => handleButtonClick('Edit')}>Edit</Button>
-              <Button onClick={() => handleButtonClick('Delete')}>Delete</Button>
+              </Ulist>
+              <ButtonContainer>
+                <Button color="dark" className="rounded-pill" onClick={() => handleButtonClick('Edit')}>Edit</Button>
+                <Button color="dark" className="rounded-pill" onClick={() => handleButtonClick('Delete')}>Delete</Button>
+              </ButtonContainer>
             </PopoverBody>
           </Popover>
         </Card>
@@ -71,7 +77,7 @@ function ItemCard({
     editing && <ItemForm
                 items={items}
                 setItems={setItems}
-                avaialble={available}
+                available={available}
                 firebaseKey={firebaseKey}
                 image={image}
                 itemID={itemID}
