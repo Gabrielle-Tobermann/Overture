@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
+import { Button, Input } from 'reactstrap';
 import ItemCard from '../components/ItemCard';
 import ItemForm from '../components/ItemForm';
 import {
@@ -13,19 +13,45 @@ import {
 
 function BowView({ items, setItems }) {
   const [adding, setAdding] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleButtonClick = () => {
     setAdding(true);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <div>
       <ViewTitle>Bow Inventory</ViewTitle>
+      <Input placeholder='Search' value={searchTerm} onChange={handleSearchChange}></Input>
+
       <Button color="dark" style={{ fontSize: '20px' }} onClick={handleButtonClick}>+</Button>
       {adding && <ItemForm
       setItems={setItems}
       items={items}
       />}
+       { searchTerm === ''
+         ? ''
+         : items.filter((item) => item.itemType === 'bow' && item.itemID.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
+          <ItemCard
+            key={item.firebaseKey}
+            itemID={item.itemID}
+            image={item.image}
+            type={item.type}
+            size={item.size}
+            rental={item.rental}
+            price={item.price}
+            available={item.available}
+            firebaseKey={item.firebaseKey}
+            setItems={setItems}
+            items={items}
+            itemType={item.itemType}
+            />
+         ))
+      }
        <WholeCardContainer>
         <CardContainer>
           <InstrumentTitle>Violin Bows</InstrumentTitle>
