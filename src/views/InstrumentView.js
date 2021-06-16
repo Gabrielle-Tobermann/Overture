@@ -12,7 +12,7 @@ import {
   WholeCardContainer,
   SearchInput,
   TopContainer
-} from '../styles/itemCardStyle';
+} from '../styles/ItemsStyle';
 
 function InstrumentView({ items, setItems }) {
   const [adding, setAdding] = useState(false);

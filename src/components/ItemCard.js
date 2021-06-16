@@ -7,9 +7,9 @@ import {
   PopoverHeader,
   PopoverBody
 } from 'reactstrap';
+import { ButtonContainer, PopImage, Ulist } from '../styles/ItemsStyle';
 import { deleteItem } from '../helpers/data/itemsData';
 import ItemForm from './ItemForm';
-import { ButtonContainer, PopImage, Ulist } from '../styles/itemCardStyle';
 
 function ItemCard({
   itemID,

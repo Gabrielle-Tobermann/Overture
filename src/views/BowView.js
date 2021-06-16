@@ -12,7 +12,7 @@ import {
   TopContainer,
   ButtonSearchContainer,
   SearchInput
-} from '../styles/itemCardStyle';
+} from '../styles/ItemsStyle';
 
 function BowView({ items, setItems }) {
   const [adding, setAdding] = useState(false);
