@@ -25,4 +25,20 @@ const createItem = (itemObj) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getItems, createItem };
+const deleteItem = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbURL}/items/${firebaseKey}.json`)
+    .then(() => {
+      getItems().then((resp) => resolve(resp));
+    }).catch((error) => reject(error));
+});
+
+const updateItem = (itemObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbURL}/items/${itemObj.firebaseKey}.json`, itemObj)
+    .then(() => {
+      getItems().then((resp) => resolve(resp));
+    }).catch((error) => reject(error));
+});
+
+export {
+  getItems, createItem, deleteItem, updateItem
+};
