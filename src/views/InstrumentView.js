@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Input } from 'reactstrap';
+import { Button } from 'reactstrap';
 import ItemCard from '../components/ItemCard';
 import ItemForm from '../components/ItemForm';
 import {
-  CardContainer, InstrumentCard, InstrumentTitle, ViewTitle, WholeCardContainer
+  CardContainer,
+  InstrumentCard,
+  InstrumentTitle,
+  TitleSearchContainer,
+  ViewTitle,
+  WholeCardContainer,
+  SearchInput
 } from '../styles/itemCardStyle';
 
 function InstrumentView({ items, setItems }) {
@@ -21,10 +27,10 @@ function InstrumentView({ items, setItems }) {
 
   return (
     <div>
-      <div>
+      <TitleSearchContainer>
         <ViewTitle>Instrument Inventory</ViewTitle>
-        <Input placeholder='Search' value={searchTerm} onChange={handleSearchChange}></Input>
-      </div>
+        <SearchInput placeholder='Search' value={searchTerm} onChange={handleSearchChange}></SearchInput>
+      </TitleSearchContainer>
       <Button color="dark" style={{ fontSize: '20px' }} onClick={handleButtonClick}>+</Button>
       {adding && <ItemForm
       setItems={setItems}

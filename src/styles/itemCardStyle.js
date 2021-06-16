@@ -58,6 +58,19 @@ const Ulist = styled.ul`
   text-align: center;
   padding-left: 0;
 `;
+
+const SearchInput = styled.input`
+  width: 25%;
+  height: fit-content;
+  jusitfy-self: flex-end;
+`;
+
+const TitleSearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export {
   CardContainer,
   InstrumentCard,
@@ -68,5 +81,7 @@ export {
   AddButton,
   PopImage,
   ButtonContainer,
-  Ulist
+  Ulist,
+  SearchInput,
+  TitleSearchContainer
 };
