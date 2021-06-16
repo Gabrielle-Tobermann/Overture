@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Input } from 'reactstrap';
+import { Button } from 'reactstrap';
 import ItemCard from '../components/ItemCard';
 import ItemForm from '../components/ItemForm';
 import {
@@ -8,7 +8,10 @@ import {
   WholeCardContainer,
   InstrumentTitle,
   InstrumentCard,
-  ViewTitle
+  ViewTitle,
+  TopContainer,
+  ButtonSearchContainer,
+  SearchInput
 } from '../styles/itemCardStyle';
 
 function BowView({ items, setItems }) {
@@ -25,10 +28,13 @@ function BowView({ items, setItems }) {
 
   return (
     <div>
-      <ViewTitle>Bow Inventory</ViewTitle>
-      <Input placeholder='Search' value={searchTerm} onChange={handleSearchChange}></Input>
-
-      <Button color="dark" style={{ fontSize: '20px' }} onClick={handleButtonClick}>+</Button>
+       <TopContainer>
+        <ViewTitle>Bow Inventory</ViewTitle>
+      <ButtonSearchContainer>
+        <Button color="dark" style={{ fontSize: '20px', fontWeight: 'bold' }} onClick={handleButtonClick}>+</Button>
+        <SearchInput placeholder='Search' value={searchTerm} onChange={handleSearchChange}></SearchInput>
+      </ButtonSearchContainer>
+      </TopContainer>
       {adding && <ItemForm
       setItems={setItems}
       items={items}

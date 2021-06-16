@@ -33,6 +33,7 @@ const InstrumentTitle = styled.h2`
 const ViewTitle = styled.h1`
   margin-top: 2%;
   margin-bottom: 2%;
+  width: 50%;
 `;
 
 const AddButton = styled.button`
@@ -60,15 +61,24 @@ const Ulist = styled.ul`
 `;
 
 const SearchInput = styled.input`
-  width: 25%;
   height: fit-content;
   jusitfy-self: flex-end;
+  width: 45%;
+  border: solid 1px #C0BFBF;
+  margin-left: 5%;
 `;
 
-const TitleSearchContainer = styled.div`
+const ButtonSearchContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  width: 50%;
+  margin-right: 4%;
+  margin-left: 4%;
+`;
+
+const TopContainer = styled.div`
+  display: flex;
 `;
 
 export {
@@ -83,5 +93,6 @@ export {
   ButtonContainer,
   Ulist,
   SearchInput,
-  TitleSearchContainer
+  ButtonSearchContainer,
+  TopContainer
 };

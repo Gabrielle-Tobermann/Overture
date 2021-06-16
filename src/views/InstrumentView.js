@@ -7,10 +7,11 @@ import {
   CardContainer,
   InstrumentCard,
   InstrumentTitle,
-  TitleSearchContainer,
+  ButtonSearchContainer,
   ViewTitle,
   WholeCardContainer,
-  SearchInput
+  SearchInput,
+  TopContainer
 } from '../styles/itemCardStyle';
 
 function InstrumentView({ items, setItems }) {
@@ -27,11 +28,13 @@ function InstrumentView({ items, setItems }) {
 
   return (
     <div>
-      <TitleSearchContainer>
+      <TopContainer>
         <ViewTitle>Instrument Inventory</ViewTitle>
+      <ButtonSearchContainer>
+        <Button color="dark" style={{ fontSize: '20px', fontWeight: 'bold' }} onClick={handleButtonClick}>+</Button>
         <SearchInput placeholder='Search' value={searchTerm} onChange={handleSearchChange}></SearchInput>
-      </TitleSearchContainer>
-      <Button color="dark" style={{ fontSize: '20px' }} onClick={handleButtonClick}>+</Button>
+      </ButtonSearchContainer>
+      </TopContainer>
       {adding && <ItemForm
       setItems={setItems}
       items={items}
