@@ -21,8 +21,10 @@ function InstrumentView({ items, setItems }) {
 
   return (
     <div>
-      <ViewTitle>Instrument Inventory</ViewTitle>
-      <Input placeHolder='Search' value={searchTerm} onChange={handleSearchChange}></Input>
+      <div>
+        <ViewTitle>Instrument Inventory</ViewTitle>
+        <Input placeholder='Search' value={searchTerm} onChange={handleSearchChange}></Input>
+      </div>
       <Button color="dark" style={{ fontSize: '20px' }} onClick={handleButtonClick}>+</Button>
       {adding && <ItemForm
       setItems={setItems}
@@ -46,7 +48,7 @@ function InstrumentView({ items, setItems }) {
             itemType={item.itemType}
             />
         ))
-      })
+      }
       <WholeCardContainer>
         <CardContainer>
           <InstrumentTitle>Violins</InstrumentTitle>
